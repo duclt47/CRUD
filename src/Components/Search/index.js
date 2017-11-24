@@ -1,11 +1,9 @@
 import React from 'react';
 
-import Items from '../Items';
-import Table from '../Table';
-function Search({ }) {
+function Search({onChange}) {
   return (
     <div className="input-group">
-      <input type="text" className="form-control" placeholder="Search for..."/>
+      <input type="text" className="form-control" placeholder="Search for..." onChange={onChange}/>
       <span className="input-group-btn">
         <button className="btn btn-secondary" type="button"><i className="fa fa-search"></i></button>
       </span>&nbsp;

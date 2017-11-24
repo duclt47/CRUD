@@ -29,9 +29,13 @@ class App extends Component {
     }
   }
   renderTask = () => {
-    this.state.listTask.map(function(item){
-      
-    })
+    return (
+      this.state.listTask.map(function(item,index){
+        return(
+          <Items numerical={index} nameTask={item.name} status={item.status} key={index}/>
+        )
+      }) 
+    )
   }
   render() {
     return (
@@ -46,7 +50,7 @@ class App extends Component {
             <div>
               <div className='wrap-search-sort'>
                 <Search />
-                <button type="submit" className="btn btn-dark">Sort &nbsp;<i class="fa fa-sort" aria-hidden="true"></i></button>
+                <button type="submit" className="btn btn-dark">Sort &nbsp;<i className="fa fa-sort" aria-hidden="true"></i></button>
               </div>
               <table className='table'>
                 <thead>
@@ -58,7 +62,7 @@ class App extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  <Items numerical={1} nameTask='learn reactjs' status='active'/>
+                  {this.renderTask()}
                   <Items numerical={2} nameTask='learn redux' status='deactive'/>
                 </tbody>
               </table>
