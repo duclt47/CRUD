@@ -1,11 +1,11 @@
 import React from 'react';
 import './style.css';
-function AddTask({ }) {
+function AddTask({ onClick, onChange, getName, getStatus, save, clear }) {
   return (
     <div className='col-sm-4'>
       <div className="alert alert-warning alert-dismissible fade show" role="alert">
         Add task
-        <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+        <button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={onClick}>
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -13,15 +13,15 @@ function AddTask({ }) {
         <form>
           <div className="form-group">
             <label>Name</label>
-            <input type="text" className="form-control" id="Name" placeholder="Name"/>
+            <input type="text" className="form-control" id="Name" placeholder="Name" onChange={getName}/>
           </div>
-          <div className="form-group">
-            <label>Status</label>
-            <input type="text" className="form-control" id="Status" placeholder="Status"/>
-          </div>
+          <select className="form-control form-control-sm form-group" onChange={getStatus}>
+            <option>active</option>
+            <option>deactive</option>
+          </select>
           <div className='wrap-button'>
-            <button type="submit" className="btn btn-primary">Save</button>&nbsp;
-            <button type="submit" className="btn btn-danger">Delete</button>
+            <button type='button' className="btn btn-primary" onClick={save}>Save</button>&nbsp;
+            <button type='button' className="btn btn-danger" onClick={clear}>Clear</button>
           </div>
         </form>
       </div>

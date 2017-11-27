@@ -8,6 +8,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isShowAddTask: true,
+      nameTask: '',
+      statusTask: '',
       listTask: [
         {
           name: 'learn reactjs',
@@ -37,15 +40,29 @@ class App extends Component {
       }) 
     )
   }
+  SaveTask = () => {
+    this.state.listTask.push({
+      name: this.state.nameTask,
+      status: this.state.statusTask
+    })
+    console.log(this.state.listTask)
+  }
   render() {
     return (
       <div className="App">
-        <Title title='CRUD' />
+        <Title title='CRUD'/>
         <div className='content'>
-          <AddTask />
-          <div className='col-sm-8 wrapper'>
+          { this.state.isShowAddTask ? <AddTask
+              onClick={ () => this.setState({ isShowAddTask: false }) }
+              getStatus={ (value)=> this.setState({ statusTask: value.target.value })}
+              getName={(value)=> this.setState({ nameTask: value.target.value })}
+              save={()=> this.SaveTask()}
+            /> : '' }
+          <div className={this.state.isShowAddTask ? 'col-sm-8 wrapper' : 'col-sm-12 wrapper' }>
             <div className='add'>
-              <button type="submit" className="btn btn-primary add-button"><i className="fa fa-plus icon-add-button"></i>&nbsp; Add Task</button>
+              <button type="submit" className="btn btn-primary add-button" onClick={() => this.setState({ isShowAddTask: true })}>
+                <i className="fa fa-plus icon-add-button"></i>&nbsp; Add Task
+              </button>
             </div>
             <div>
               <div className='wrap-search-sort'>
@@ -63,7 +80,6 @@ class App extends Component {
                 </thead>
                 <tbody>
                   {this.renderTask()}
-                  <Items numerical={2} nameTask='learn redux' status='deactive'/>
                 </tbody>
               </table>
             </div>
