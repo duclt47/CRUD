@@ -40,12 +40,18 @@ class App extends Component {
       }) 
     )
   }
-  SaveTask = () => {
-    this.state.listTask.push({
-      name: this.state.nameTask,
-      status: this.state.statusTask
+
+  CloseForm = () => {
+    this.setState({
+      isShowAddTask: false
     })
-    console.log(this.state.listTask)
+  }
+
+  onSubmit = (data) => {
+    this.state.listTask.push(data);
+    this.setState({
+      listTask: this.state.listTask
+    })
   }
   render() {
     return (
@@ -53,10 +59,8 @@ class App extends Component {
         <Title title='CRUD'/>
         <div className='content'>
           { this.state.isShowAddTask ? <AddTask
-              onClick={ () => this.setState({ isShowAddTask: false }) }
-              getStatus={ (value)=> this.setState({ statusTask: value.target.value })}
-              getName={(value)=> this.setState({ nameTask: value.target.value })}
-              save={()=> this.SaveTask()}
+            CloseForm = { () => this.CloseForm() }
+            onSubmit = { (data) => this.onSubmit(data) }
             /> : '' }
           <div className={this.state.isShowAddTask ? 'col-sm-8 wrapper' : 'col-sm-12 wrapper' }>
             <div className='add'>
