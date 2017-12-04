@@ -13,32 +13,35 @@ class App extends Component {
       statusTask: '',
       listTask: [
         {
-          name: 'learn reactjs',
-          status: 'active',
+          name: 'name',
+          status: 'status'
         },
         {
-          name: 'learn redux',
-          status: 'deactive',
-        },
-        {
-          name: 'learn angular',
-          status: 'deactive',
-        },
-        {
-          name: 'learn vuejs',
-          status: 'deactive',
+          name: 'name',
+          status: 'status'
         },
       ]
     }
   }
+
+  componentWillMount(){
+    var data = JSON.parse(localStorage.getItem('Data'))
+    this.setState({
+      listTask: data
+    })
+  }
+
   renderTask = () => {
-    return (
-      this.state.listTask.map(function(item,index){
-        return(
-          <Items numerical={index} nameTask={item.name} status={item.status} key={index}/>
-        )
-      }) 
-    )
+    var data = JSON.parse(localStorage.getItem('Data'))
+    if(data !== null ){
+      return (
+        data.map(function(item,index){
+          return(
+            <Items numerical={index} nameTask={item.name} status={item.status} key={index}/>
+          )
+        }) 
+      )
+    }
   }
 
   CloseForm = () => {
@@ -52,6 +55,7 @@ class App extends Component {
     this.setState({
       listTask: this.state.listTask
     })
+    localStorage.setItem('Data',JSON.stringify(this.state.listTask))
   }
   render() {
     return (

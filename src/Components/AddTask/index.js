@@ -4,7 +4,7 @@ class AddTask extends Component {
   constructor(props) {
     super(props) 
     this.state = {
-      status: 'deactive',
+      status: 'deactive'
     }
   }
   CloseForm = () => {
@@ -22,7 +22,6 @@ class AddTask extends Component {
   onSubmit = (event) => {
     event.preventDefault();
     this.props.onSubmit(this.state);
-    // console.log(this.state)
   }
   render() {
     return (
@@ -37,11 +36,11 @@ class AddTask extends Component {
           <form onSubmit={this.onSubmit}>
             <div className="form-group">
               <label>Name</label>
-              <input type="text" className="form-control" name="Name" placeholder="Name" onChange={this.onChange}/>
+              <input type="text" className="form-control" name="name" placeholder="Name" onChange={this.onChange}/>
             </div>
             <select
               className="form-control form-control-sm form-group"
-              name="Status"
+              name="status"
               onChange={this.onChange}
               value={this.state.status}
             >
